@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     rss_observer (0.1.0)
-      get_process_mem
+      get_process_mem (~> 0.2)
 
 GEM
   remote: https://rubygems.org/
@@ -50,9 +50,9 @@ DEPENDENCIES
   bundler (~> 1.17)
   rake (~> 10.0)
   rspec (~> 3.0)
-  rspec_junit_formatter
+  rspec_junit_formatter (~> 0.3)
   rss_observer!
-  rubocop
+  rubocop (~> 0.74)
 
 BUNDLED WITH
    1.17.2
