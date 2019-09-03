@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rss_observer (0.1.0)
+    rss_observer (0.2.0)
       get_process_mem (~> 0.2)
 
 GEM
