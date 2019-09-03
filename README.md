@@ -16,11 +16,11 @@ to your Gemfile and run bundle install.
 To use this middleware in a Rails application, modify relevant environment file (or application.rb to log rss in all environments).
 You can use the supplied STDOUT logger and insert the RssObserver middleware after `Rails::Rack::Logger`.
 ```ruby
-require 'rss_observer/logger'
+require 'rss_observer/logger_handler'
 module FooApp
   class Application < Rails::Application
     # ...
-    config.middleware.insert_after Rails::Rack::Logger, RssObserver::Middleware, RssObserver::Logger.new
+    config.middleware.insert_after Rails::Rack::Logger, RssObserver::Middleware, RssObserver::LoggerHandler.new
   end
 end
 ```
@@ -32,8 +32,12 @@ the usage log with actual request logs.
 ```ruby
 # lib/rails_logger_handler.rb
 class RailsLoggerHandler
-  def call(kilobytes)
-    Rails.logger.info "RSS change: #{kilobytes} KB"
+  def initial_memory(kilobytes)
+    @initial_memory = kilobytes
+  end
+
+  def final_memory(kilobytes)
+    Rails.logger.info "Memory change: #{final_memory - @initial_memory} KB"
   end
 end
 

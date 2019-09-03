@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
+require 'rss_observer/logger_handler'
+
 RSpec.describe RssObserver::Middleware do
   subject(:middleware) { described_class.new(app, handler) }
 
-  let(:handler) { instance_double(Proc) }
+  let(:handler) { instance_double(RssObserver::LoggerHandler) }
   let(:app) { instance_double(Proc) }
 
   describe '#call' do
@@ -19,7 +21,8 @@ RSpec.describe RssObserver::Middleware do
     it 'runs the app and calls handler with calculated mem' do
       expect(get_process_mem).to receive(:kb) { 1000.0 }
       expect(get_process_mem).to receive(:kb) { 2000.0 }
-      expect(handler).to receive(:call).with(1000.0)
+      expect(handler).to receive(:initial_memory).with(1000.0)
+      expect(handler).to receive(:final_memory).with(2000.0)
       expect(app).to receive(:call).with([]).and_return(%w[foo bar baz])
 
       expect(subject).to match_array(%w[foo bar baz])
