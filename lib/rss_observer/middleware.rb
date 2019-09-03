@@ -11,8 +11,11 @@ module RssObserver
     # @param handler [Object] Handler that accepts memory change updates
     def initialize(app, handler)
       @app = app
-      unless handler.respond_to?(:call)
-        raise UnsupportedHandlerError, 'Handler must respond to the #call(kilobytes) method'
+      unless handler.respond_to?(:initial_memory)
+        raise UnsupportedHandlerError, 'Handler must respond to the #initial_memory(kilobytes) method'
+      end
+      unless handler.respond_to?(:final_memory)
+        raise UnsupportedHandlerError, 'Handler must respond to the #final_memory(kilobytes) method'
       end
 
       @handler = handler
@@ -21,11 +24,9 @@ module RssObserver
     # @param env [Hash] Full application environment hash
     # @return [Array] Status code, hash of headers, response body
     def call(env)
-      before_memory = current_memory
-
+      handler.initial_memory(current_memory)
       app.call(env).tap do
-        memory_change = current_memory - before_memory
-        handler.call(memory_change)
+        handler.final_memory(current_memory)
       end
     end
 
