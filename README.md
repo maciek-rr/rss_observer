@@ -1,8 +1,9 @@
 # RssObserver
 
-Rails middleware for observing of RSS changes around the request.
+Rails middleware for observing of RSS changes around the request. Under the hood, it utilizes [the get_process_mem](https://github.com/schneems/get_process_mem) gem.
 
 [![CircleCI](https://circleci.com/gh/irvingwashington/rss_observer.svg?style=svg)](https://circleci.com/gh/irvingwashington/rss_observer)
+
 
 # Installation
 
