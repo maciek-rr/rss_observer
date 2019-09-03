@@ -2,6 +2,8 @@
 
 Rails middleware for observing of RSS changes around the request.
 
+[![CircleCI](https://circleci.com/gh/irvingwashington/rss_observer.svg?style=svg)](https://circleci.com/gh/irvingwashington/rss_observer)
+
 # Installation
 
 Add the line
