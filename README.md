@@ -33,11 +33,11 @@ the usage log with actual request logs.
 # lib/rails_logger_handler.rb
 class RailsLoggerHandler
   def initial_memory(kilobytes)
-    @initial_memory = kilobytes
+    Thread.current[:_initial_memory] = kilobytes
   end
 
   def final_memory(kilobytes)
-    Rails.logger.info "Memory change: #{final_memory - @initial_memory} KB"
+    Rails.logger.info "Memory change: #{final_memory - Thread.current[:_initial_memory]} KB"
   end
 end
 

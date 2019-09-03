@@ -35,8 +35,7 @@ module RssObserver
     attr_reader :app, :handler
 
     def current_memory
-      @mem ||= GetProcessMem.new
-      @mem.kb
+      RssObserver.current_memory
     end
   end
 end
