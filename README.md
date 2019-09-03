@@ -46,3 +46,11 @@ module FooApp
   end
 end
 ```
+
+# Example
+
+RssObserver vs Default Rails request logs
+```
+I, [2019-09-03T14:56:22.735264 #7290]  INFO -- : [96956f1a-7f7f-4836-a8a1-bc3c05696433] Completed 200 OK in 47ms (Views: 29.7ms | ActiveRecord: 6.3ms | Allocations: 18614)
+I, [2019-09-03T14:56:22.737113 #7290]  INFO -- : [96956f1a-7f7f-4836-a8a1-bc3c05696433] Memory change: 264.0 KB
+```
